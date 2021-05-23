@@ -1,0 +1,80 @@
+{% extends 'apps/base.html' %}
+{% block title %}商品{% endblock %}
+{% block wrapper %}
+
+
+        <!--====================================================================
+           Start Shop Page
+       =====================================================================-->
+        <section class="shop-page mt-120 rmt-80 mb-90 rmb-50">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="shop-sidebar">
+                            <div class="shop-widget b1">
+                                <div class="shop-widget-title">
+                                    <h5><i class="flaticon-list"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">分类目录</font></font></h5>
+                                </div>
+                                <ul>
+                                      {% for lei in leixins %}
+                            <li><a href="{% url 'shop:show_case' %}?itype={{lei}}"><i class="flaticon-apple"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> {{lei}}</font></font></a></li>
+                               {% endfor %}
+                               </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-9 col-lg-8">
+                        <div class="shop-items load-more">
+
+                            <div class="search-result-header">
+                                <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">显示结果{{ nums }}产品</font><font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="paixu('jiage')">价格排序</a></font><font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="paixu('xiaoliang')">销量排序</a></font><font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="paixu('pingllun')">评论排序</a></font></font></h5>
+                            </div>
+
+                            <div class="row">
+
+                                <!--single Product -->
+                                {%  for data in datas  %}
+                                <div class="col-xl-4 col-lg-6 col-sm-6">
+                                    <div class="product load-more__item">
+                                        <div class="product-img-wrap">
+                                            <img src="{{data.image}}" alt="img"  width="226" height="169">
+                                            <!-- Button trigger modal -->
+                                            <button class="quick-view" type="button" data-toggle="modal" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{% url 'shop:show_case_item' data.id %}">快速浏览</a></font></font></button>
+                                        </div>
+
+                                        <div class="product-content-wrap">
+                                            <div class="product-content">
+                                                <p><a href="shop-details.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ data.name  | slice:"20" }}</font></font><br></a></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--====================================================================
+           End Shop Page
+       =====================================================================-->
+    {% block scripts %}
+     <script>
+         function paixu(type) {
+            var home = window.location.href;
+            var url = home + '&type=' + type;
+            window.location.href= url
+
+	}
+</script>
+    {% endblock %}
+
+
+{% endblock %}

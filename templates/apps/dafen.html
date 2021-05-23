@@ -1,0 +1,54 @@
+{% extends 'apps/base.html' %}
+{% block title %}商品打分{% endblock %}
+{% block wrapper %}
+
+        <!--====================================================================
+           Start Checkout Page
+       =====================================================================-->
+        <section class="checkout-page mt-120 rmt-80 mb-120 rmb-80">
+            <div class="container">
+                <div class="row col-gap-60">
+                    <div class="col-xl-8 col-lg-6">
+                        <div class="checkout-form-wrap rmb-50">
+
+                           <div class="cart-title">
+                                <h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商品打分</font></font></h4>
+                            </div>
+
+                            <!-- Form Area Start -->
+                            <form id="checkout-form" name="checkout-form" class="checkout-form" action="{% url 'shop:dafen' id %}" method="post">
+                                {% csrf_token %}
+                                    <div class="col-md-61">
+                                        <div class="form-group">
+                                            <label ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商品名</font></font></label>
+                                            <textarea  class="form-control"  rows="10" disabled="disabled">
+商品名称：{{ case.name }}
+品牌： {{case.pingpai}}
+价格：{{case.price}}
+型号:{{ case.xinghao }}
+
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-61">
+                                        <div class="form-group">
+                                            <label for="phone-number"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">输入你的分数(1-5)*</font></font></label>
+                                            <input type="number" class="form-control" id="phone-number" name="fenshu" value="{{ fenshu }}" >
+                                        </div>
+                                    </div>
+                                <div class="signin-button-wrap">
+                                        <button type="submit" class="btn-bg2 cyxy-trs-source"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交</font></font><font class="cyxy-trs-target" style="display: none;"> 提交</font></button>
+                                </div>
+                            </form>
+                            <!-- Form Area End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--====================================================================
+           End Checkout Page
+       =====================================================================-->
+
+
+{% endblock %}

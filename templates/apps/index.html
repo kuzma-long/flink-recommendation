@@ -1,0 +1,163 @@
+{% extends 'apps/base.html' %}
+{% block title %}主页{% endblock %}
+{% block wrapper %}
+        <!--====================================================================
+            Start Hero Section
+        =====================================================================-->
+<!--        <section class="hero-section" style="margin-top: 140px;">-->
+<!--            <div class="hero-slider slick-initialized slick-slider slick-dotted">-->
+
+<!--                &lt;!&ndash; hero-slide-item &ndash;&gt;-->
+<!--                <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 7490px; transform: translate3d(-1498px, 0px, 0px);"><div class="hero-slide-item slick-slide slick-cloned" style="background-image: url(&quot;/static/assets/img/hero/bg3.png&quot;); width: 1498px;" data-slick-index="-1" aria-hidden="true" tabindex="-1">-->
+<!--                    <div class="container">-->
+
+<!--                        <div class="hero-inner">-->
+<!--                            <h1 class="mb-20 light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全球</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">优质货源</font></font></span></h1>-->
+<!--                            <div class="hero-btn">-->
+<!--                                <a href="#" class="theme-btn" tabindex="-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">现在下单</font></font></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div><div class="hero-slide-item slick-slide slick-current slick-active" style="background-image: url(&quot;/static/assets/img/hero/bg1.png&quot;); width: 1498px;" data-slick-index="0" aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide00" aria-describedby="slick-slide-control00">-->
+<!--                    <div class="container">-->
+
+<!--                        <div class="hero-inner">-->
+<!--                            <h1 class="mb-20 light"><font style="vertical-align: inherit;"></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">帮助</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">订购</font><font style="vertical-align: inherit;">，节省</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您的</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">时间</font></font></h1>-->
+<!--                            <div class="hero-btn">-->
+<!--                                <a href="#" class="theme-btn" tabindex="0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">现在下单</font></font></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--                </div>-->
+<!--                </div>-->
+
+<!--            <ul class="slick-dots" style="display: block;" role="tablist"><li class="slick-active" role="presentation"><button type="button" role="tab" id="slick-slide-control00" aria-controls="slick-slide00" aria-label="1 of 2" tabindex="0" aria-selected="true">1</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control01" aria-controls="slick-slide01" aria-label="2 of 2" tabindex="-1">2</button></li></ul></div>-->
+<!--        </section>-->
+        <!--====================================================================
+            End Hero Section
+        =====================================================================-->
+
+
+
+<section class="made-for-product text-center pt-45 pb-20">
+            <div class="container">
+                <div class="section-title mb-45">
+                    <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">实时热门商品</font></font></h2>
+                </div>
+                <div class="row">
+
+                    <!--single Product -->
+                    {% for data in renming %}
+                    <div class="custom-5-item col-xl-3 col-lg-4 col-md-6">
+                        <div class="product">
+                            <div class="product-img-wrap">
+                                <img src="{{data.image}}" alt="img">
+                                <!-- Button trigger modal -->
+                                <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{% url 'shop:show_case_item' data.id %}" >快速浏览</a></font></font></button>
+                            </div>
+
+                            <div class="product-content-wrap">
+                                <div class="product-content">
+                                    <p><a href="shop-details.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ data.name | slice:"20" }}</font></font><br><font style="vertical-align: inherit;"></font></a></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--====================================================================
+            Start Made For You Section
+        =====================================================================-->
+<section class="made-for-product text-center pt-45 pb-20">
+            <div class="container">
+                <div class="section-title mb-45">
+                    <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">新品上架</font></font></h2>
+                </div>
+                <div class="row">
+
+                    <!--single Product -->
+                    {% for data in xingping %}
+                    <div class="custom-5-item col-xl-3 col-lg-4 col-md-6">
+                        <div class="product">
+                            <div class="product-img-wrap">
+                                <img src="{{data.image}}" alt="img">
+                                <!-- Button trigger modal -->
+                                <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{% url 'shop:show_case_item' data.id %}" >快速浏览</a></font></font></button>
+                            </div>
+
+                            <div class="product-content-wrap">
+                                <div class="product-content">
+                                    <p><a href="shop-details.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ data.name | slice:"20" }}</font></font><br><font style="vertical-align: inherit;"></font></a></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="made-for-product text-center pt-45 pb-20">
+            <div class="container">
+                <div class="section-title mb-45">
+                    <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">站长推荐</font></font></h2>
+                    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">为你推荐你喜欢的商品</font></font></p>
+                </div>
+                <div class="row">
+
+                    <!--single Product -->
+                    {% for data in datas %}
+                    <div class="custom-5-item col-xl-3 col-lg-4 col-md-6">
+                        <div class="product">
+                            <div class="product-img-wrap">
+                                <img src="{{data.image}}" alt="img">
+                                <!-- Button trigger modal -->
+                                <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{% url 'shop:show_case_item' data.id %}" >快速浏览</a></font></font></button>
+                            </div>
+
+                            <div class="product-content-wrap">
+                                <div class="product-content">
+                                    <p><a href="shop-details.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ data.name | slice:"20" }}</font></font><br><font style="vertical-align: inherit;"></font></a></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+
+                </div>
+
+            </div>
+        </section>
+
+        <!--====================================================================
+            End Made For You Section
+        =====================================================================-->
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'apps/base.html' %}
+{% block title %}用户中心{% endblock %}
+{% block wrapper %}
+
+        <!--====================================================================
+           Start Checkout Page
+       =====================================================================-->
+        <section class="checkout-page mt-120 rmt-80 mb-120 rmb-80">
+            <div class="container">
+                <div class="row col-gap-60">
+                    <div class="col-xl-8 col-lg-6">
+                        <div class="checkout-form-wrap rmb-50">
+
+                           <div class="cart-title">
+                                <h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用户信息</font></font></h4>
+                            </div>
+
+                            <!-- Form Area Start -->
+                            <form id="checkout-form" name="checkout-form" class="checkout-form" action="{% url 'shop:Personal' %}" method="post">
+                                {% csrf_token %}
+                                <div class="row col-gap-50 clearfix">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="f-name"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">账号名*</font></font></label>
+                                            <input type="text" class="form-control" id="f-name" name="name" value="{{ result.username }}" required="" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="country"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">邮箱*</font></font></label>
+                                            <input type="text" class="form-control" id="country" name="email" value="{{ result.email }}" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="street-address"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">街道地址*</font></font></label>
+                                            <input type="text" class="form-control" id="street-address" name="address" value="{{ result.address }}" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone-number"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册时间*</font></font></label>
+                                            <input type="text" class="form-control" id="phone-number" value="{{ result.date_joined | date:'Y:m:d' }}" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="signin-button-wrap">
+                                        <button type="submit" class="btn-bg2 cyxy-trs-source"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">修改</font></font><font class="cyxy-trs-target" style="display: none;"> 修改</font></button>
+                                </div>
+
+
+                            </form>
+                            <!-- Form Area End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--====================================================================
+           End Checkout Page
+       =====================================================================-->
+
+
+{% endblock %}

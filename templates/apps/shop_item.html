@@ -1,0 +1,100 @@
+{% extends 'apps/base.html' %}
+{% block title %}商品{% endblock %}
+{% block wrapper %}
+<!--==================================== Start product-quick-view //product-modal  ================-->
+<div class="product-modal" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-35 pt-0">
+
+
+                <div class="product-quick-view">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="product-preview-wrap">
+                                    <div class="tab-content bg-white p-50 b1 br-5">
+                                        <div class="tab-pane active" id="preview2">
+                                            <img src="{{datas.image}}" alt="Product Preview Image" data-magnify-src="/static/imgs/{{datas.image.url}}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="product-details text-left bg-white ml-25 px-50 py-45 b1 br-5">
+                                    <h4 class="mb-25 rmt-25">{{ datas.name }}</h4>
+                                    <div class="rating mb-25">
+                                        <div class="text">品牌： {{datas.pingpai}}</div>
+                                    </div>
+                                    <div class="rating mb-25">
+                                    <div class="text">价格：{{datas.price}}</div>
+                                    </div>
+                                    <p style="white-space: pre-line">型号:{{ datas.xinghao }}</p>
+                                    <p style="white-space: pre-line">cpu:{{datas.cpu}}</p>
+                                    <p style="white-space: pre-line">类型:{{datas.leixing}}</p>
+                                    <p style="white-space: pre-line">内存:{{ datas.neicun }}</p>
+                                    <p style="white-space: pre-line">系统:{{ datas.xitong }}</p>
+                                    <p style="white-space: pre-line">产地:{{ datas.cangdi }}</p>
+                                    <p style="white-space: pre-line">材质:{{ datas.caizhi }}</p>
+                                    <div class="product-spinner mt-20">
+                                        <a href="{{ datas.lianjie }}" class="theme-btn br-30 ml-20">跳转</a>
+                                        <a href="{% url 'shop:dafen' datas.id %}" class="theme-btn br-30 ml-20">打分</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section class="made-for-product text-center pt-45 pb-20">
+            <div class="container">
+                <div class="section-title mb-45">
+                    <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">猜你喜欢</font></font></h2>
+                </div>
+                <div class="row">
+
+                    <!--single Product -->
+                    {% for data in tuijian %}
+                    <div class="custom-5-item col-xl-3 col-lg-4 col-md-6">
+                        <div class="product">
+                            <div class="product-img-wrap">
+                                <img src="{{data.image}}" alt="img">
+                                <!-- Button trigger modal -->
+                                <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{% url 'shop:show_case_item' data.id %}" >快速浏览</a></font></font></button>
+                            </div>
+
+                            <div class="product-content-wrap">
+                                <div class="product-content">
+                                    <p><a href="shop-details.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ data.name | slice:"20" }}</font></font><br><font style="vertical-align: inherit;"></font></a></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--==================================== end product-quick-view //product-modal  ================-->
+
+<!--====================================================================
+End Shop Page
+=====================================================================-->
+
+
+
+
+
+{% endblock %}

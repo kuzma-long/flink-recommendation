@@ -1,0 +1,922 @@
+<html lang="zh-CN" class="translated-ltr"><head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{% block title %}注册{% endblock %}</title>
+
+    <!-- Fav Icons -->
+    <link rel="shortcut icon" href="/static/assets/img/favicon.png" type="image/x-icon">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+
+<style type="text/css">[contenteditable="true"]:active, [contenteditable="true"]:focus {
+    /*border-color: #00B977;*/
+    outline: #00B977 solid thin;
+    /*color: #00B977;*/
+    background-color: rgba(0, 185, 119, 0.05);
+}
+
+.cyxy-trs-target.colored {
+    background-color: rgba(0, 185, 119, 0.05);
+}
+
+.cyxy-target-popup {
+    padding: 1.3rem 12px;
+    position: absolute;
+    display: -webkit-flex;
+    display: inline-flex;
+    flex-direction: row;
+    overflow: scroll;
+    vertical-align: middle;
+    z-index: 199099;
+    top: 1px;
+    left: 1px;
+    background: #fff;
+    opacity: 0.98;
+    /*margin: 0px 5%;*/
+    height: auto;
+    width: auto;
+    border: 1px solid #E6E6E6;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.13);
+    border-radius: 5px;
+    /*height: 7rem;*/
+}
+
+@media (max-width: 468px) {
+    .cyxy-target-popup {
+        /*width: 90%;*/
+        /*margin: 0px 5%;*/
+        left: 10%;
+        /*right: 5%;*/
+        /*width: 30rem;*/
+        /*height: 14.58rem;*/
+    }
+}
+
+#cyxy-popup-left-slide {
+    height: 22px;
+    display: inline;
+    vertical-align: middle;
+    margin-right: 14px;
+    cursor: pointer;
+}
+
+#cyxy-popup-right-slide {
+    height: 22px;
+    display: inline;
+    vertical-align: middle;
+    margin-left: 0px;
+    cursor: pointer;
+}
+
+#cyxy-popup-userinfo {
+    display: inline;
+}
+
+.cyxy-target-count {
+    display: inline;
+    vertical-align: middle;
+    font-size: 10px;
+}
+
+#cyxy-popup-avatar {
+    /*margin-right: 30px;*/
+    /*font-size: 14px;*/
+    display: inline;
+    height: 32px;
+    vertical-align: middle;
+    border-radius: 16px;
+}
+
+#cyxy-popup-name-time {
+    display: -webkit-flex;
+    display: inline-flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    /*position: relative;*/
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 6px;
+}
+
+#cyxy-popup-name {
+    /*vertical-align: middle;*/
+    /*display: flex;*/
+    font-size: 14px;
+    color: #333;
+    height: 18px;
+    overflow: hidden;
+    max-width: 84px;
+}
+
+#cyxy-popup-time {
+    /*margin-right: 30px;*/
+    /*font-size: 14px;*/
+    /*display: flex;*/
+    font-size: 12px;
+    margin-top: 4px;
+    color: #999
+}
+
+.cyxy-footer {
+    display: none;
+    position: fixed;
+    bottom: 0px;
+    padding: 0px 0px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    opacity: 0.90;
+    border: 1px solid #E6E6E6;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.13);
+    border-radius: 2px;
+    z-index: 201712;
+    text-align: center;
+}
+
+.cyxy-footer-p {
+    padding: 12px 0px;
+    margin: 0px;
+    font-size: 12px;
+    color: #333;
+    background: #fff;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: 200;
+}
+
+#cyxy-popup-favour {
+    text-align: center;
+    display: inline;
+    margin-right: 20px;
+    margin-left: 46px;
+    cursor: pointer;
+}
+
+#cyxy-popup-favour.commit {
+    /*padding: 2px 6px;*/
+    /*border: 1px solid #00B977;*/
+    /*border-radius: 4px;*/
+}
+
+#cyxy-popup-oppose {
+    text-align: center;
+    display: inline;
+    cursor: pointer;
+}
+
+#cyxy-popup-favour-img {
+    display: inline;
+    height: 20px;
+    /*width: 22px;*/
+    vertical-align: middle;
+}
+
+#cyxy-popup-favour-img.commit {
+    /*height: 22px;*/
+    /*vertical-align: middle;*/
+}
+
+#cyxy-popup-oppose-img {
+    display: inline;
+    height: 18px;
+    vertical-align: middle;
+}
+
+#cyxy-popup-favour-num {
+    font-size: 14px;
+    margin-left: 4px;
+    /*margin-left: 0.47rem;*/
+    color: #999999;
+}
+
+#cyxy-popup-oppose-num {
+    font-size: 14px;
+    margin-left: 4px;
+    /*margin-left: 0.47rem;*/
+    color: #999;
+}
+
+@media (max-width: 320px) {
+    #cyxy-popup-favour {
+        margin-right: 0.8rem;
+        margin-left: 1.5rem;
+    }
+
+    #cyxy-popup-left-slide {
+        margin-right: 0.8rem;
+    }
+
+    #cyxy-popup-right-slide {
+        margin-left: 1rem;
+    }
+
+}
+
+.layui-m-layer {
+    position: relative;
+    z-index: 19891014
+}
+
+.layui-m-layer * {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box
+}
+
+.layui-m-layermain, .layui-m-layershade {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%
+}
+
+.layui-m-layershade {
+    background-color: rgba(0, 0, 0, .7);
+    pointer-events: auto
+}
+
+.layui-m-layermain {
+    display: table;
+    font-family: Helvetica, arial, sans-serif;
+    pointer-events: none
+}
+
+.layui-m-layermain .layui-m-layersection {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center
+}
+
+.layui-m-layerchild {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    background-color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+    pointer-events: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-duration: .2s;
+    animation-duration: .2s
+}
+
+@-webkit-keyframes layui-m-anim-scale {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.5);
+        transform: scale(.5)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes layui-m-anim-scale {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.5);
+        transform: scale(.5)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+.layui-m-anim-scale {
+    animation-name: layui-m-anim-scale;
+    -webkit-animation-name: layui-m-anim-scale
+}
+
+@-webkit-keyframes layui-m-anim-up {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(800px);
+        transform: translateY(800px)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+
+@keyframes layui-m-anim-up {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(800px);
+        transform: translateY(800px)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+
+.layui-m-anim-up {
+    -webkit-animation-name: layui-m-anim-up;
+    animation-name: layui-m-anim-up
+}
+
+.layui-m-layer0 .layui-m-layerchild {
+    width: 90%;
+    max-width: 640px
+}
+
+.layui-m-layer1 .layui-m-layerchild {
+    border: none;
+    border-radius: 0
+}
+
+.layui-m-layer2 .layui-m-layerchild {
+    width: auto;
+    max-width: 260px;
+    min-width: 40px;
+    border: none;
+    background: 0 0;
+    box-shadow: none;
+    color: #fff
+}
+
+.layui-m-layerchild h3 {
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px 5px 0 0;
+    text-align: center
+}
+
+.layui-m-layerbtn span, .layui-m-layerchild h3 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+
+.layui-m-layercont {
+    padding: 50px 30px;
+    line-height: 22px;
+    text-align: center
+}
+
+.layui-m-layer1 .layui-m-layercont {
+    padding: 0;
+    text-align: left
+}
+
+.layui-m-layer2 .layui-m-layercont {
+    text-align: center;
+    padding: 0;
+    line-height: 0
+}
+
+.layui-m-layer2 .layui-m-layercont i {
+    width: 25px;
+    height: 25px;
+    margin-left: 8px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 100%;
+    -webkit-animation: layui-m-anim-loading 1.4s infinite ease-in-out;
+    animation: layui-m-anim-loading 1.4s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+}
+
+.layui-m-layerbtn, .layui-m-layerbtn span {
+    position: relative;
+    text-align: center;
+    border-radius: 0 0 5px 5px
+}
+
+.layui-m-layer2 .layui-m-layercont p {
+    margin-top: 20px
+}
+
+@-webkit-keyframes layui-m-anim-loading {
+    0%, 100%, 80% {
+        transform: scale(0);
+        -webkit-transform: scale(0)
+    }
+    40% {
+        transform: scale(1);
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes layui-m-anim-loading {
+    0%, 100%, 80% {
+        transform: scale(0);
+        -webkit-transform: scale(0)
+    }
+    40% {
+        transform: scale(1);
+        -webkit-transform: scale(1)
+    }
+}
+
+.layui-m-layer2 .layui-m-layercont i:first-child {
+    margin-left: 0;
+    -webkit-animation-delay: -.32s;
+    animation-delay: -.32s
+}
+
+.layui-m-layer2 .layui-m-layercont i.layui-m-layerload {
+    -webkit-animation-delay: -.16s;
+    animation-delay: -.16s
+}
+
+.layui-m-layer2 .layui-m-layercont > div {
+    line-height: 22px;
+    padding-top: 7px;
+    margin-bottom: 20px;
+    font-size: 14px
+}
+
+.layui-m-layerbtn {
+    display: box;
+    display: -moz-box;
+    display: -webkit-box;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 0;
+    border-top: 1px solid #D0D0D0;
+    background-color: #F2F2F2
+}
+
+.layui-m-layerbtn span {
+    display: block;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    -webkit-box-flex: 1;
+    font-size: 14px;
+    cursor: pointer
+}
+
+.layui-m-layerbtn span[yes] {
+    color: #40AFFE
+}
+
+.layui-m-layerbtn span[no] {
+    border-right: 1px solid #D0D0D0;
+    border-radius: 0 0 0 5px
+}
+
+.layui-m-layerbtn span:active {
+    background-color: #F6F6F6
+}
+
+.layui-m-layerend {
+    position: absolute;
+    right: 7px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    font-weight: 400;
+    background: 0 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    font-size: 30px
+}
+
+.layui-m-layerend::after, .layui-m-layerend::before {
+    position: absolute;
+    left: 5px;
+    top: 15px;
+    content: '';
+    width: 18px;
+    height: 1px;
+    background-color: #999;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    border-radius: 3px
+}
+
+.layui-m-layerend::after {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg)
+}
+
+body .layui-m-layer .layui-m-layer-footer {
+    position: fixed;
+    width: 95%;
+    max-width: 100%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    background: 0 0
+}
+
+.layui-m-layer-footer .layui-m-layercont {
+    padding: 20px;
+    border-radius: 5px 5px 0 0;
+    background-color: rgba(255, 255, 255, .8)
+}
+
+.layui-m-layer-footer .layui-m-layerbtn {
+    display: block;
+    height: auto;
+    background: 0 0;
+    border-top: none
+}
+
+.layui-m-layer-footer .layui-m-layerbtn span {
+    background-color: rgba(255, 255, 255, .8)
+}
+
+.layui-m-layer-footer .layui-m-layerbtn span[no] {
+    color: #FD482C;
+    border-top: 1px solid #c2c2c2;
+    border-radius: 0 0 5px 5px
+}
+
+.layui-m-layer-footer .layui-m-layerbtn span[yes] {
+    margin-top: 10px;
+    border-radius: 5px
+}
+
+body .layui-m-layer .layui-m-layer-msg {
+    width: auto;
+    max-width: 90%;
+    margin: 0 auto;
+    bottom: -150px;
+    background-color: rgba(0, 0, 0, .7);
+    color: #fff
+}
+
+.layui-m-layer-msg .layui-m-layercont {
+    padding: 10px 20px
+}
+
+.cyxy-function {
+    position: fixed;
+    bottom: 140px;
+    right: 20px;
+    z-index: 109999;
+    cursor: pointer;
+}
+.cyxy-personal {
+    position: fixed;
+    bottom: 190px;
+    right: 20px;
+    z-index: 109999;
+    cursor: pointer;
+}
+.cyxy-personal  .cyxy-favorite-btn{
+    border: 2px solid #5ebb8d;
+    box-sizing: border-box;
+ }
+/*switch button*/
+.cyxy-switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 28px;
+}
+
+.cyxy-switch input {display:none;}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #00B976;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #00B976;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.cyxy-favorite {
+    /*background: ;*/
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    z-index: 109999;
+    cursor: pointer;
+}
+
+.cyxy-favorite-btn {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+.collection-success{
+    /*opacity: 0.6;*/
+    /*background: #EAEAEA;*/
+    color: #FFFFFF;
+}
+.collection-success:hover{
+    /*opacity: 0.45;*/
+    /*background: #000000;*/
+    color: #FFFFFF;
+}
+.layui-m-layercont .cyxy-trs-target{
+    display: none;
+}
+.collection-icon{
+    width: 12px;
+    height: 13px;
+    background: url('//staging.caiyunapp.com/imgs/layar-target.png') no-repeat;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+}
+.collection-success >a{
+    margin-left: 12px;
+    vertical-align: middle;
+}
+.cy_free_box{
+    position: relative;
+}
+.cy_free_box img{
+    width:100%;
+    cursor: pointer;
+    -moz-user-select: none; /*火狐*/
+    -webkit-user-select: none;  /*webkit浏览器*/
+    -ms-user-select: none;   /*IE10*/
+    -khtml-user-select: none; /*早期浏览器*/
+    user-select: none;
+}
+.cy_free_button{
+    /* padding: 0 20%; */
+}
+.cy_free_button img{
+    width: 40%;
+    margin: 0 10px;
+}
+.cy_free_del{
+    position: absolute;
+    width: 6%;
+    height: 6%;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    /* background: #000; */
+    z-index: 10;
+}
+.layui-m-layer-cy_free_content{
+    background: inherit !important;
+}
+@media (max-width: 650px) {
+    .cyxy-function{
+        /* top: inherit !important; */
+        /* right: 20px !important;
+        bottom: 60px !important; */
+    }
+    .cyxy-favorite{
+        /* top: 50px !important; */
+    }
+}</style>
+    <style>.cyxy-video-trans {
+        position: fixed;
+        bottom: 130px;
+        right: 20px;
+        z-index: 2147483647 !important;
+        cursor: pointer;
+        filter: grayscale(100%);
+        height: 50px !important;
+    }
+    .cyxy-video-trans-btn {
+        height: 36px !important;
+        width: 36px !important;
+        border-radius: 50%;
+        overflow: hidden;
+    }</style>
+    <style>
+    .lang_radio {
+        display: none;
+    }
+    .lang_radio_img {
+        vertical-align: unset !important;
+        width: 13px !important;
+        height: 13px !important;
+        margin-top: 0px !important;
+        cursor: pointer;
+        margin-right: 3px !important;
+        margin-top: 4px !important;
+        display: inline;
+        min-height: unset !important;
+        min-width: unset !important;
+    }
+</style><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"></head>
+
+<body>
+    <div class="page-wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader" style="display: none;"></div>
+
+
+        <!--====================================================================
+                                Start Header area
+        =====================================================================-->
+        <header class="main-header">
+            <div class="container">
+                <div class="header-inner">
+                    <div class="logo">
+                        <a href="{% url 'shop:index' %}"><img src="/static/assets/img/logo.png" alt="手徽标"></a>
+                    </div>
+
+                    <div class="categories">
+                        <button><i class="flaticon-list"></i>
+                        <span class="cyxy-trs-source cyxy-trs-source-ted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">分类目录</font></font><font class="cyxy-trs-target" style="display: none;"> 类别</font></span></button>
+                        <ul>
+                       </ul>
+                    </div>
+
+                    <form action="{% url 'shop:query' %}" class="menu-search" method="post">
+                        <input type="search" placeholder="搜索" required="" name="sousuo" value="">
+                        <button type="submit" class="cyxy-trs-source"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">搜索</font></font><font class="cyxy-trs-target" style="display: none;"> 搜寻</font></button>
+                    </form>
+
+                    <div class="menu-collections">
+                        <div class="collection-item cart">
+                        </div>
+                        <div class="collection-item profile">
+                            <i class="flaticon-user-1"></i>
+                            <div class="collection-inner">
+                                <ul>
+                                    <li><a href="{% url 'account_login' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font></a></li>
+                                    <li><a href="/accounts/logout/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">退出登录</font></font></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="collection-close"></div>
+        </header>
+        <!--====================================================================
+                                End Header area
+        =====================================================================-->
+
+            {% block wrapper %}
+
+
+
+
+        <section class="login-area my-120 rmy-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 pr-0 rpr-15 rmb-80">
+                        <div class="login-information bg-white br-5 py-125">
+                            <div class="login-info-inner">
+                                <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册</font></font></h2>
+                                <form action="{% url 'account_signup' %}" class="login-form" method="post">
+                                    {% csrf_token %}
+                                    <div class="text-field">
+                                        <label for="name"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全名*</font></font></label>
+                                        <input type="text" class="form-control" placeholder="用户名" id="name" name="username">
+                                    </div>
+                                    <p style="color: red">{{ form.username.errors }}</p>
+                                    <div class="email-field">
+                                        <label for="email"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">输入电子邮件*</font></font></label>
+                                        <input  id="email" type="text" class="form-control" placeholder="邮箱地址" name="email">
+                                    </div>
+                                    <p style="color: red">{{ form.email.errors }}</p>
+                                    <div class="password-field">
+                                        <label for="pass"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">密码*</font></font></label>
+                                        <input  id="pass" type="password" class="form-control" placeholder="密码" name="password1">
+                                    </div>
+                                    <p style="color: red">{{ form.password1.errors }}</p>
+                                    <div class="password-field">
+                                        <label for="address"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">重复密码*</font></font></label>
+                                        <input id="address" type="password" class="form-control" placeholder="重复密码" name="password2">
+                                    </div>
+                                    <p style="color: red">{{ form.password2.errors }}</p>
+                                    <div class="alternative-login"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                        你有账户吗？</font></font><a class="signup-link" href="{% url 'account_login' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font></a>
+                                    </div>
+                                    <div class="signin-button-wrap">
+                                        <button type="submit" class="btn-bg2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册</font></font></button>
+                                    </div>
+
+                                </form>
+
+                  {% if form.errors %}
+                    <div class="text-center">
+                        {% for _, error in form.errors.items %}
+                        <strong style="color: red">{{ error }}</strong>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 px-0 rpl-15 login-image-wrap">
+                        <div class="login_img">
+                            <img src="/static/assets/img/log-in.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+            {% endblock %}
+
+
+        <!--====================================================================
+                            Start footer section
+        =====================================================================-->
+        <footer class="footer bg-black pt-100 text-lg-left text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+
+
+                        <!-- Copyright Area-->
+                        <div class="copyright text-center pl-10 pr-10 pt-30 pb-10 mt-55 rmt-35 mb-65">
+                            <p class="cyxy-trs-source cyxy-trs-source-ted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商城网站</font></font></p><p class="cyxy-trs-source cyxy-trs-target" style="display: none;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网上购物商城</font></font></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+        <!--====================================================================
+                                End footer section
+        =====================================================================-->
+
+
+    </div>
+    <!--End pagewrapper-->
+
+
+    <!-- Scroll Top Button -->
+    <button class="scroll-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></button>
+
+
+    <!-- jequery plugins -->
+    <script src="/static/assets/js/jquery.min.js"></script>
+    {% block scripts %}
+
+    {% endblock %}
+    <script src="/static/assets/js/bootstrap-v4.1.3.min.js"></script>
+    <script src="/static/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/static/assets/js/jquery.simpleLoadMore.min.js"></script>
+    <script src="/static/assets/js/slick.min.js"></script>
+    <script src="/static/assets/js/appear.js"></script>
+
+    <!-- Custom script -->
+    <script src="/static/assets/js/script.js"></script>
+
+
